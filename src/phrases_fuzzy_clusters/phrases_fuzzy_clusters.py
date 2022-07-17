@@ -66,7 +66,7 @@ def associate_cluster_per_phrase(phrases, similarity_threshold=95):
     Returns
     -------
     list
-        A list of lists with size two, where the first item of the list is
+        A list of size two tuples, where the first item of the tuple is
         the original phrase and the second item is a integer representing
         the cluster's phrase.
 
@@ -81,30 +81,26 @@ def associate_cluster_per_phrase(phrases, similarity_threshold=95):
 
     Examples
     --------
-    >>> associate_cluster_per_phrase(["morava em florianópolis", "comprar um carro", "compra de um carro", "moro em florianópolis"])
-    [['morava em florianópolis', 1], ['comprar um carro', 2], ['compra de um carro', 2], ['moro em florianópolis', 1]]
-    >>> add(25, 0)
-    25
-    >>> add(10, -10)
-    0
+    >>> associate_cluster_per_phrase(["morava em florianópolis", "comprar um carro", "compra de um carro", "em florianópolis eu moro", "gosto de samba", "quero comer tapioca"])
+    [('morava em florianópolis', 1), ('comprar um carro', 2), ('compra de um carro', 2), ('em florianópolis eu moro', 1), ('gosto de samba', -1), ('quero comer tapioca', -1)]
     """
     tokenized_corpus = make_corpus(phrases)
     has_cluster = []
-    clusters = [[phrase, -1] for phrase in phrases]
+    clusters = [(phrase, -1) for phrase in phrases]
     cluster_id = 0
     for i, i_item in enumerate(tokenized_corpus):
         if i_item not in has_cluster:
             new_idx = True
             for j, j_item in enumerate(tokenized_corpus):
                 if i != j and j_item[1] not in has_cluster:
-                    similarity = fuzz.partial_ratio(i_item[1], j_item[1])
+                    similarity = fuzz.token_sort_ratio(i_item[1], j_item[1])
                     if similarity >= similarity_threshold:
                         if new_idx:
                             cluster_id += 1
-                            clusters[i][1] = cluster_id
+                            clusters[i] = (i_item[0], cluster_id)
                             has_cluster.append(i_item[1])
                             new_idx = False
-                        clusters[j][1] = cluster_id
+                        clusters[j] = (j_item[0], cluster_id)
                         has_cluster.append(j_item[1])
     return clusters
 
