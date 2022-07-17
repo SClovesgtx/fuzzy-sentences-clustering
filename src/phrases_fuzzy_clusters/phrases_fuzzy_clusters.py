@@ -13,6 +13,7 @@ except:
     stopwords = nltk.corpus.stopwords.words("portuguese")
     tokenizer = nltk.tokenize.word_tokenize
 
+
 def clean_token(token):
     new_token = "".join([s for s in token if s.isalpha()])
     return new_token
@@ -21,14 +22,16 @@ def clean_token(token):
 def is_valid_token(token):
     is_valid = False
     if token not in stopwords:
-       is_valid = True
+        is_valid = True
     return is_valid
+
 
 def apply_stemmer(token):
     new_token = clean_token(token=token)
     if new_token:
         return stemmer.stem(new_token)
     return ""
+
 
 def split_into_tokens(phrase):
     lower_case_phrase = phrase.lower()
@@ -43,6 +46,7 @@ def make_corpus(phrases):
         tokenized_phrase = split_into_tokens(phrase=phrase)
         tokenized_corpus.append((phrase, tokenized_phrase))
     return tokenized_corpus
+
 
 def associate_cluster_per_phrase(phrases, similarity_threshold=95):
     """
@@ -63,7 +67,7 @@ def associate_cluster_per_phrase(phrases, similarity_threshold=95):
     -------
     list
         A list of lists with size two, where the first item of the list is
-        the original phrase and the second item is a integer representing 
+        the original phrase and the second item is a integer representing
         the cluster's phrase.
 
     Raises

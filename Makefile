@@ -41,6 +41,7 @@ help:
 	@echo
 	@echo "COMMANDS"
 	@echo
+	@echo "    code-format                  aplly black code formatter."
 	@echo "    cyclomatic-complexity        metric for the complexity of our code."
 	@echo "    profiler-report              look up for slow code."
 	@echo "    test                         run all unit tests."
@@ -50,6 +51,8 @@ help:
 # User Commands #
 #################
 
+code-format:
+	$ black src/
 
 cyclomatic-complexity:
 	$ radon cc src/phrases_fuzzy_clusters/phrases_fuzzy_clusters.py -a
