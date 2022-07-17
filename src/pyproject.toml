@@ -3,6 +3,21 @@ name = "phrases-fuzzy-clusters"
 version = "0.0.1"
 description = "Similar phrase clustering based on fuzzy-match."
 authors = ["Cloves Paiva <clovesgtx@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/SClovesgtx/phrases-fuzzy-clusters"
+repository = "https://github.com/SClovesgtx/phrases-fuzzy-clusters"
+keywords = ["clusterization", "fuzzy", "similarity", "text"]
+
+classifiers=[
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Operating System :: OS Independent",
+    ]
 
 [tool.poetry.dependencies]
 python = "^3.8"
