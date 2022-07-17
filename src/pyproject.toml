@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "phrases-fuzzy-clusters"
-version = "0.0.1"
+version = "0.0.2"
 description = "Similar phrase clustering based on fuzzy-match."
 authors = ["Cloves Paiva <clovesgtx@gmail.com>"]
 license = "MIT"
@@ -21,9 +21,16 @@ classifiers=[
 
 [tool.poetry.dependencies]
 python = "^3.8"
+nltk = "3.7"
+fuzzywuzzy = "0.18.0"
+python-Levenshtein-wheels = "0.13.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
+pyinstrument = "4.2.0"
+black = "22.3.0"
+bandit = "1.7.4"
+radon = "5.1.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
