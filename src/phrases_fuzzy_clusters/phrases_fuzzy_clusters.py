@@ -1,4 +1,3 @@
-from cmath import phase
 import nltk
 from fuzzywuzzy import fuzz
 
@@ -45,7 +44,46 @@ def make_corpus(phrases):
         tokenized_corpus.append((phrase, tokenized_phrase))
     return tokenized_corpus
 
-def group_by_clusters(phrases, similarity_threshold=95):
+def associate_cluster_per_phrase(phrases, similarity_threshold=95):
+    """
+    Associates a cluster for each phrase.
+
+    A cluster is representing by a positive integer.
+
+    If a phrase doesn't look like any other, it will receive the value -1.
+
+    Parameters
+    ----------
+    phrases : list
+        A list of strings (phrases).
+    similarity_threshold : int
+        A integer between 0 and 100.
+
+    Returns
+    -------
+    list
+        A list of lists with size two, where the first item of the list is
+        the original phrase and the second item is a integer representing 
+        the cluster's phrase.
+
+    Raises
+    ======
+     MyException
+        if anything bad happens
+
+    See Also
+    --------
+    group_by_clusters : Subtract one integer from another.
+
+    Examples
+    --------
+    >>> associate_cluster_per_phrase(["morava em florianópolis", "comprar um carro", "compra de um carro", "moro em florianópolis"])
+    [['morava em florianópolis', 1], ['comprar um carro', 2], ['compra de um carro', 2], ['moro em florianópolis', 1]]
+    >>> add(25, 0)
+    25
+    >>> add(10, -10)
+    0
+    """
     tokenized_corpus = make_corpus(phrases)
     has_cluster = []
     clusters = [[phrase, -1] for phrase in phrases]
@@ -67,6 +105,6 @@ def group_by_clusters(phrases, similarity_threshold=95):
     return clusters
 
 
-phrases = ["eu morava em florianópolis", "eu moro em florianópolis", "quero comprar um carro", "quero compra de um carro"]
-res = group_by_clusters(phrases)
-print(res)
+# phrases = ["morava em florianópolis", "comprar um carro", "compra de um carro", "moro em florianópolis"]
+# res = associate_cluster_per_phrase(phrases)
+# print(res)
