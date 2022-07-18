@@ -14,9 +14,9 @@ except:
     tokenizer = nltk.tokenize.word_tokenize
 
 
-def clean_token(token):
-    new_token = "".join([s for s in token if s.isalpha()])
-    return new_token
+def clean_string(text):
+    new_text = "".join([s for s in text if s == " " or s.isalpha()])
+    return new_text
 
 
 def is_valid_token(token):
@@ -25,18 +25,11 @@ def is_valid_token(token):
         is_valid = True
     return is_valid
 
-
-def apply_stemmer(token):
-    new_token = clean_token(token=token)
-    if new_token:
-        return stemmer.stem(new_token)
-    return ""
-
-
 def split_into_tokens(sentence):
     lower_case_sentence = sentence.lower()
-    tokens = tokenizer(lower_case_sentence, language="portuguese")
-    clean_tokens = [apply_stemmer(token) for token in tokens if is_valid_token(token)]
+    clean_sentence = clean_string(lower_case_sentence)
+    tokens = tokenizer(clean_sentence, language="portuguese")
+    clean_tokens = [stemmer.stem(token) for token in tokens if is_valid_token(token)]
     return clean_tokens
 
 
@@ -76,24 +69,22 @@ def look_for_clusters(sentences, similarity_threshold=95):
     >>> look_for_clusters(["morava em florianópolis", "comprar um carro", "compra de um carro", "em florianópolis eu moro", "gosto de samba", "quero comer tapioca"])
     output: [1, 2, 2, 1, -1, -1]
     """
-    tokenized_corpus = make_corpus(sentences)
-    has_cluster = []
     clusters = [-1] * len(sentences)
+    tokenized_corpus = make_corpus(sentences)
+    clean_sentences = [" ".join(tokenized_doc) for tokenized_doc in tokenized_corpus]
     cluster_id = 0
-    for i, i_item in enumerate(tokenized_corpus):
-        if i_item not in has_cluster:
-            new_idx = True
-            for j, j_item in enumerate(tokenized_corpus):
-                if i != j and j_item not in has_cluster:
+    for i, i_item in enumerate(clean_sentences):
+        if i_item != "":
+            for j, j_item in enumerate(clean_sentences):
+                if i != j:
                     similarity = fuzz.token_sort_ratio(i_item, j_item)
                     if similarity >= similarity_threshold:
-                        if new_idx:
+                        if clusters[i] < 0:
                             cluster_id += 1
                             clusters[i] = cluster_id
-                            has_cluster.append(i_item)
-                            new_idx = False
-                        clusters[j] = cluster_id
-                        has_cluster.append(j_item)
+                            clusters[j] = cluster_id
+                        elif clusters[i] > 0:
+                            clusters[j] = clusters[i]
     return clusters
 
 
@@ -103,8 +94,6 @@ if __name__ == "__main__":
         "comprar um carro",
         "compra de um carro",
         "em florianópolis eu moro",
-        "gosto de samba",
-        "quero comer tapioca",
     ]
-    res = look_for_clusters(sentences)
+    res = look_for_clusters(sentences, 50)
     print(res)
