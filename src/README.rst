@@ -15,10 +15,13 @@ sentences for example.
 This package tries to solve this for a small dataset by making the
 following naive assumption:
 
-   *If I remove all the stopwords between two sentences, extract the
-   stems of their words and after that find similar phrases between
-   these two sentences, they are probably talking about the same, or
-   similar, subject.*
+   *If I remove all
+   the*\ `stopwords <https://en.wikipedia.org/wiki/Stop_word>`__\ *between
+   two sentences, extract
+   the*\ `stems <https://en.wikipedia.org/wiki/Stemming>`__\ *of their
+   words, sort the words their words and after that find similar phrases
+   (intersection) between these two sentences, they are probably talking
+   about the same, or similar, subject.*
 
 The goal here is to form clusters/groups with at least two similar
 sentences, isolated sentences (sentences that don’t look like any other
