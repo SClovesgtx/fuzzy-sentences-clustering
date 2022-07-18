@@ -25,6 +25,7 @@ def is_valid_token(token):
         is_valid = True
     return is_valid
 
+
 def split_into_tokens(sentence):
     lower_case_sentence = sentence.lower()
     clean_sentence = clean_string(lower_case_sentence)
