@@ -19,7 +19,7 @@ following naive assumption:
    the*\ `stopwords <https://en.wikipedia.org/wiki/Stop_word>`__\ *between
    two sentences, extract
    the*\ `stems <https://en.wikipedia.org/wiki/Stemming>`__\ *of their
-   words, sort the words their words and after that find similar phrases
+   words, sort their words and after that find similar phrases
    (intersection) between these two sentences, they are probably talking
    about the same, or similar, subject.*
 
