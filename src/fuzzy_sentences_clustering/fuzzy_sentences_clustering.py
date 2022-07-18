@@ -70,13 +70,11 @@ def look_for_clusters(sentences, similarity_threshold=95):
 
     Raises
     ======
-     MyException
-        if anything bad happens
 
     Examples
     --------
     >>> look_for_clusters(["morava em florianópolis", "comprar um carro", "compra de um carro", "em florianópolis eu moro", "gosto de samba", "quero comer tapioca"])
-    [('morava em florianópolis', 1), ('comprar um carro', 2), ('compra de um carro', 2), ('em florianópolis eu moro', 1), ('gosto de samba', -1), ('quero comer tapioca', -1)]
+    output: [1, 2, 2, 1, -1, -1]
     """
     tokenized_corpus = make_corpus(sentences)
     has_cluster = []
