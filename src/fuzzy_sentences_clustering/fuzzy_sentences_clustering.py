@@ -33,78 +33,80 @@ def apply_stemmer(token):
     return ""
 
 
-def split_into_tokens(phrase):
-    lower_case_phrase = phrase.lower()
-    tokens = tokenizer(lower_case_phrase, language="portuguese")
+def split_into_tokens(sentence):
+    lower_case_sentence = sentence.lower()
+    tokens = tokenizer(lower_case_sentence, language="portuguese")
     clean_tokens = [apply_stemmer(token) for token in tokens if is_valid_token(token)]
     return clean_tokens
 
 
-def make_corpus(phrases):
+def make_corpus(sentences):
     tokenized_corpus = []
-    for phrase in phrases:
-        tokenized_phrase = split_into_tokens(phrase=phrase)
-        tokenized_corpus.append((phrase, tokenized_phrase))
+    for sentence in sentences:
+        tokenized_sentence = split_into_tokens(sentence=sentence)
+        tokenized_corpus.append(tokenized_sentence)
     return tokenized_corpus
 
 
-def associate_cluster_per_phrase(phrases, similarity_threshold=95):
+def look_for_clusters(sentences, similarity_threshold=95):
     """
-    Associates a cluster for each phrase.
+    Associates a cluster for each sentence.
 
     A cluster is representing by a positive integer.
 
-    If a phrase doesn't look like any other, it will receive the value -1.
+    If a sentence doesn't look like any other, it will receive the value -1.
 
     Parameters
     ----------
-    phrases : list
-        A list of strings (phrases).
+    sentences : list
+        A list of strings (sentences).
     similarity_threshold : int
         A integer between 0 and 100.
 
     Returns
     -------
     list
-        A list of size two tuples, where the first item of the tuple is
-        the original phrase and the second item is a integer representing
-        the cluster's phrase.
+        A list of integers representing clusters.
 
     Raises
     ======
      MyException
         if anything bad happens
 
-    See Also
-    --------
-    group_by_clusters : Subtract one integer from another.
-
     Examples
     --------
-    >>> associate_cluster_per_phrase(["morava em florianópolis", "comprar um carro", "compra de um carro", "em florianópolis eu moro", "gosto de samba", "quero comer tapioca"])
+    >>> look_for_clusters(["morava em florianópolis", "comprar um carro", "compra de um carro", "em florianópolis eu moro", "gosto de samba", "quero comer tapioca"])
     [('morava em florianópolis', 1), ('comprar um carro', 2), ('compra de um carro', 2), ('em florianópolis eu moro', 1), ('gosto de samba', -1), ('quero comer tapioca', -1)]
     """
-    tokenized_corpus = make_corpus(phrases)
+    tokenized_corpus = make_corpus(sentences)
     has_cluster = []
-    clusters = [(phrase, -1) for phrase in phrases]
+    clusters = [-1] * len(sentences)
     cluster_id = 0
     for i, i_item in enumerate(tokenized_corpus):
         if i_item not in has_cluster:
             new_idx = True
             for j, j_item in enumerate(tokenized_corpus):
-                if i != j and j_item[1] not in has_cluster:
-                    similarity = fuzz.token_sort_ratio(i_item[1], j_item[1])
+                if i != j and j_item not in has_cluster:
+                    similarity = fuzz.token_sort_ratio(i_item, j_item)
                     if similarity >= similarity_threshold:
                         if new_idx:
                             cluster_id += 1
-                            clusters[i] = (i_item[0], cluster_id)
-                            has_cluster.append(i_item[1])
+                            clusters[i] = cluster_id
+                            has_cluster.append(i_item)
                             new_idx = False
-                        clusters[j] = (j_item[0], cluster_id)
-                        has_cluster.append(j_item[1])
+                        clusters[j] = cluster_id
+                        has_cluster.append(j_item)
     return clusters
 
 
-# phrases = ["morava em florianópolis", "comprar um carro", "compra de um carro", "moro em florianópolis"]
-# res = associate_cluster_per_phrase(phrases)
-# print(res)
+if __name__ == "__main__":
+    sentences = [
+        "morava em florianópolis",
+        "comprar um carro",
+        "compra de um carro",
+        "em florianópolis eu moro",
+        "gosto de samba",
+        "quero comer tapioca",
+    ]
+    res = look_for_clusters(sentences)
+    print(res)

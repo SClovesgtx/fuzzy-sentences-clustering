@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "phrases-fuzzy-clusters"
-version = "0.0.3"
-description = "Similar phrase clustering based on fuzzy-match."
+name = "fuzzy-sentences-clustering"
+version = "0.0.0"
+description = "Clustering similar sentences based on their fuzzy similarity."
 authors = ["Cloves Paiva <clovesgtx@gmail.com>"]
 license = "MIT"
 readme = "README.rst"
-homepage = "https://github.com/SClovesgtx/phrases-fuzzy-clusters"
-repository = "https://github.com/SClovesgtx/phrases-fuzzy-clusters"
+homepage = "https://github.com/SClovesgtx/fuzzy-sentences-clustering"
+repository = "https://github.com/SClovesgtx/fuzzy-sentences-clustering"
 keywords = ["clusterization", "fuzzy", "similarity", "text"]
 
 classifiers=[
@@ -21,6 +21,9 @@ classifiers=[
 
 [tool.poetry.dependencies]
 python = "^3.8"
+nltk = "3.7"
+fuzzywuzzy = "0.18.0"
+python-Levenshtein-wheels = "0.13.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

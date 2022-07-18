@@ -55,13 +55,13 @@ code-format:
 	$ black src/
 
 cyclomatic-complexity:
-	$ radon cc src/phrases_fuzzy_clusters/phrases_fuzzy_clusters.py -a
+	$ radon cc src/fuzzy_sentences_clustering/fuzzy_sentences_clustering.py -a
 
 profiler-report:
-	$ pyinstrument --show-all src/phrases_fuzzy_clusters/phrases_fuzzy_clusters.py
+	$ pyinstrument --show-all src/fuzzy_sentences_clustering/fuzzy_sentences_clustering.py
 
 test:
-	$ pytest src/tests/test_phrases_fuzzy_clusters.py --rootdir src/phrases_fuzzy_clusters/
+	$ pytest src/tests/test_fuzzy_sentences_clustering.py --rootdir src/
 
 vulnerability-check:
 	$ bandit --recursive src/ --skip "B101"
