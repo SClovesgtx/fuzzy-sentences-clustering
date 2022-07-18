@@ -8,7 +8,7 @@ There are some popular algorithms on the market for mining topics in a textual s
 
 This package tries to solve this for a small dataset by making the following naive assumption:
 
-> *If I remove all the stopwords between two sentences, extract the stems of their words and after that find similar phrases between these two sentences, they are probably talking about the same subject.*
+> *If I remove all the stopwords between two sentences, extract the stems of their words and after that find similar phrases between these two sentences, they are probably talking about the same, or similar, subject.*
 
 The goal here is to form clusters/groups with at least two similar sentences, isolated sentences (sentences that don't look like any other in the total set) will not generate a cluster just for them. For these cases, the sentence will receive the *-1* tag.
 

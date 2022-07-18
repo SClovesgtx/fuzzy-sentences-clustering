@@ -17,8 +17,8 @@ following naive assumption:
 
    *If I remove all the stopwords between two sentences, extract the
    stems of their words and after that find similar phrases between
-   these two sentences, they are probably talking about the same
-   subject.*
+   these two sentences, they are probably talking about the same, or
+   similar, subject.*
 
 The goal here is to form clusters/groups with at least two similar
 sentences, isolated sentences (sentences that don’t look like any other
