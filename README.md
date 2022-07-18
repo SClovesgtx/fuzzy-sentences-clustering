@@ -10,7 +10,7 @@ This package tries to solve this for a small dataset by making the following nai
 
 > *If I remove all the stopwords between two sentences, extract the stems of their words and after that find similar phrases between these two sentences, they are probably talking about the same subject.*
 
-The interest here is to form groups with at least two similar sentences, isolated sentences (sentences that don't look like any other in the total set) will not generate a cluster just for them. For these cases, the sentence will receive the *-1* tag.
+The goal here is to form clusters/groups with at least two similar sentences, isolated sentences (sentences that don't look like any other in the total set) will not generate a cluster just for them. For these cases, the sentence will receive the *-1* tag.
 
 For while it works just for **portuguese** language.
 
@@ -40,4 +40,4 @@ If you find a bug, please let me know.
 
 ## Author
 
-+ **Main Maintainer:** Cloves Paiva.
+[Cloves Paiva](https://www.linkedin.com/in/cloves-paiva-02b449124/).
