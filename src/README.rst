@@ -7,21 +7,20 @@ Purpose of the Package
 ----------------------
 
 There are some popular algorithms on the market for mining topics in a
-textual set, such as
-`LDA <https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation>`__, but
+textual set, such as `LDA <https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation>`__, but
 they don’t work very well for a small set of data, let’s say a thousand
 sentences for example.
 
 This package tries to solve this for a small dataset by making the
 following naive assumption:
 
-   *If I remove all
-   the *\ `stopwords <https://en.wikipedia.org/wiki/Stop_word>`__\ * between
+   If I remove all
+   the `stopwords <https://en.wikipedia.org/wiki/Stop_word>`__between
    two sentences, extract
-   the *\ `stems <https://en.wikipedia.org/wiki/Stemming>`__\ * of their
+   the `stems <https://en.wikipedia.org/wiki/Stemming>`__ of their
    words, sort their words and after that find similar phrases
    (intersection) between these two sentences, they are probably talking
-   about the same, or similar, subject.*
+   about the same, or similar, subject.
 
 The goal here is to form clusters/groups with at least two similar
 sentences, isolated sentences (sentences that don’t look like any other
