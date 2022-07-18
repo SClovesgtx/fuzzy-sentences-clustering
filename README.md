@@ -1,14 +1,16 @@
-# phrases-fuzzy-clusters
+# fuzzy-sentences-clustering
 
-Similar phrase clustering based on fuzzy-match.
+Clustering similar sentences based on their fuzzy similarity.
 
 ## Purpose of the Package
 
-Identify all groups/clursters of phrases based on their token sort ratio fuzzy similarity rate (clique [here](https://pypi.org/project/fuzzywuzzy/) to know more).
+There are some popular algorithms on the market for mining topics in a textual set, such as [LDA](https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation), but they don't work very well for a small set of data, let's say a thousand sentences for example.
 
-For a cluster to be formed, it needs to have at least two similar phrases, that is, if a sentence looks like at least with one other in the list, a cluster will be created for them, they will receive a positive number representing their cluster.
+This package tries to solve this for a small dataset by making the following naive assumption:
 
-If the phrase does not look like any other, it will not be associated with any cluster and will receive the *-1* tag.
+"If I remove all the stopwords between two sentences, extract the stems of their words and after that find similar phrases between these sentences, they are probably talking about the same subject."
+
+The interest here is to form groups with at least two similar sentences, isolated sentences (sentences that don't look like any other in the total set) will not generate a cluster just for them. For these cases, the sentence will receive the *-1* tag.
 
 For while it works just for **portuguese** language.
 
@@ -17,7 +19,7 @@ For while it works just for **portuguese** language.
 You can install it using pip:
 
 ```bash
-pip install phrases_fuzzy_clusters
+pip3 install phrases-fuzzy-clusters
 ```
 
 ## Usage
