@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fuzzy-sentences-clustering"
-version = "0.0.1"
+version = "1.1.1"
 description = "Clustering similar sentences based on their fuzzy similarity."
 authors = ["Cloves Paiva <clovesgtx@gmail.com>"]
 license = "MIT"

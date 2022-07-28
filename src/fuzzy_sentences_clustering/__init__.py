@@ -1,2 +1,2 @@
-__version__ = "0.0.1"
+__version__ = "1.1.1"
 from .fuzzy_sentences_clustering import *
