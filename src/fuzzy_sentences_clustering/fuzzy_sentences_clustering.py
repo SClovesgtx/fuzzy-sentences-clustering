@@ -16,6 +16,17 @@ def set_language(language):
         lang = language
 
 
+def set_simlarity_method(method):
+    if method == "token_sort_ratio":
+        return fuzz.token_sort_ratio
+    elif method == "partial_ratio":
+        return fuzz.partial_ratio
+    elif method == "token_set_ratio":
+        return fuzz.token_set_ratio
+    elif method == "ratio":
+        return fuzz.ratio
+
+
 def clean_string(text):
     new_text = "".join([s for s in text if s == " " or s.isalpha()])
     return new_text
@@ -42,17 +53,6 @@ def make_corpus(sentences):
         tokenized_sentence = split_into_tokens(sentence=sentence)
         tokenized_corpus.append(tokenized_sentence)
     return tokenized_corpus
-
-
-def set_simlarity_method(method):
-    if method == "token_sort_ratio":
-        return fuzz.token_sort_ratio
-    elif method == "partial_ratio":
-        return fuzz.partial_ratio
-    elif method == "token_set_ratio":
-        return fuzz.token_set_ratio
-    elif method == "ratio":
-        return fuzz.ratio
 
 
 def look_for_clusters(
@@ -104,15 +104,16 @@ def look_for_clusters(
     cluster_id = 0
     for i, i_item in enumerate(clean_sentences):
         if i_item != "":
-            for j, j_item in enumerate(clean_sentences):
-                if i != j:
+            for j, j_item in enumerate(clean_sentences[i:]):
+                j += i
+                if i != j and j_item != "" and clusters[j] < 0:
                     similarity = similarity_method(i_item, j_item)
                     if similarity >= similarity_threshold:
                         if clusters[i] < 0:
                             cluster_id += 1
                             clusters[i] = cluster_id
                             clusters[j] = cluster_id
-                        elif clusters[i] > 0:
+                        else:
                             clusters[j] = clusters[i]
     return clusters
 

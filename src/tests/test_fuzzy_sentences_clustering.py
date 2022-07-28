@@ -3,7 +3,7 @@ from fuzzy_sentences_clustering import __version__
 
 
 def test_check_version():
-    assert __version__ == "1.1.1"
+    assert __version__ == "1.1.2"
 
 
 def test_look_for_clusters_en():
